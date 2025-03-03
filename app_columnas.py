@@ -25,29 +25,34 @@ meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto
 ventas = np.random.randint(1000, 5000, size=12)
 df_ventas = pd.DataFrame({"Mes": meses, "Ventas": ventas})
 
-# Gráfico de Ventas Mensuales
-st.subheader("📊 Ventas Mensuales")
-fig, ax = plt.subplots()
-ax.plot(df_ventas["Mes"], df_ventas["Ventas"], marker="o", color=color_grafico)
-ax.set_xlabel("Mes")
-ax.set_ylabel("Ventas")
-ax.set_title("Tendencia de Ventas Mensuales")
-plt.xticks(rotation=45)
-st.pyplot(fig)
-
 # Rendimiento de empleados por departamento
 departamentos = ["Ventas", "Soporte", "Desarrollo", "Marketing"]
 rendimiento = np.random.randint(50, 100, size=len(departamentos))
 df_rendimiento = pd.DataFrame({"Departamento": departamentos, "Rendimiento": rendimiento})
 
-# Gráfico de Barras de Rendimiento de Empleados
-st.subheader("📈 Rendimiento de Empleados")
-fig, ax = plt.subplots()
-ax.bar(df_rendimiento["Departamento"], df_rendimiento["Rendimiento"], color=color_grafico)
-ax.set_xlabel("Departamento")
-ax.set_ylabel("Rendimiento (%)")
-ax.set_title("Rendimiento por Departamento")
-st.pyplot(fig)
+# 📌 DIVIDIR EN DOS COLUMNAS
+col1, col2 = st.columns(2)
+
+with col1:
+    # Gráfico de Ventas Mensuales
+    st.subheader("📊 Ventas Mensuales")
+    fig, ax = plt.subplots()
+    ax.plot(df_ventas["Mes"], df_ventas["Ventas"], marker="o", color=color_grafico)
+    ax.set_xlabel("Mes")
+    ax.set_ylabel("Ventas")
+    ax.set_title("Tendencia de Ventas Mensuales")
+    plt.xticks(rotation=45)
+    st.pyplot(fig)
+
+with col2:
+    # Gráfico de Barras de Rendimiento de Empleados
+    st.subheader("📈 Rendimiento de Empleados")
+    fig, ax = plt.subplots()
+    ax.bar(df_rendimiento["Departamento"], df_rendimiento["Rendimiento"], color=color_grafico)
+    ax.set_xlabel("Departamento")
+    ax.set_ylabel("Rendimiento (%)")
+    ax.set_title("Rendimiento por Departamento")
+    st.pyplot(fig)
 
 # Distribución geográfica de clientes
 latitudes = np.random.uniform(-10, 50, 10)
@@ -64,4 +69,3 @@ folium_static(m)
 # Mensaje de despedida
 st.sidebar.markdown(f"👤 Usuario activo: **{nombre_usuario}**")
 st.success(f"¡Bienvenido, {nombre_usuario}! Esperamos que disfrutes del análisis.")
-
